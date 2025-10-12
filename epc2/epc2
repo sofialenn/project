@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epc-process name="Обработка заявки на оплату счета поставщику">
+    <metadata>
+        <notation>EPC</notation>
+        <student-name>[Ваше ФИО]</student-name>
+        <group>[Ваша группа]</group>
+        <date>[Дата выполнения]</date>
+        <description>Процесс обработки счета поставщика с проверкой и согласованием</description>
+    </metadata>
+    
+    <elements>
+        <!-- Начальное событие -->
+        <event id="e1" type="start">
+            <name>Поступил счет от поставщика за полученные товары/услуги</name>
+        </event>
+        
+        <!-- Функция 1 -->
+        <function id="f1">
+            <name>Проверить счет на соответствие договору и наличию акта выполненных работ</name>
+            <org-unit>Менеджер отдела закупок</org-unit>
+        </function>
+        
+        <!-- Промежуточное событие -->
+        <event id="e2" type="intermediate">
+            <name>Проверка счета завершена</name>
+        </event>
+        
+        <!-- Логический оператор XOR -->
+        <connector id="c1" type="xor">
+            <name>XOR</name>
+        </connector>
+        
+        <!-- Ветка 1: Счет корректен -->
+        <event id="e3" type="intermediate">
+            <name>Счет соответствует требованиям</name>
+        </event>
+        
+        <function id="f2">
+            <name>Согласовать оплату счета</name>
+            <org-unit>Руководитель отдела</org-unit>
+        </function>
+        
+        <event id="e4" type="intermediate">
+            <name>Оплата счета согласована</name>
+        </event>
+        
+        <!-- Ветка 2: Обнаружены ошибки -->
+        <event id="e5" type="intermediate">
+            <name>В счете обнаружены ошибки/несоответствия</name>
+        </event>
+        
+        <function id="f3">
+            <name>Направить счет поставщику на исправление</name>
+            <org-unit>Менеджер отдела закупок</org-unit>
+        </function>
+        
+        <event id="e6" type="end">
+            <name>Счет возвращен поставщику. Процесс приостановлен</name>
+        </event>
+        
+        <!-- Продолжение основной ветки -->
+        <function id="f4">
+            <name>Подготовить платежное поручение в банк-клиенте</name>
+            <org-unit>Бухгалтер</org-unit>
+        </function>
+        
+        <event id="e7" type="intermediate">
+            <name>Платежное поручение сформировано</name>
+        </event>
+        
+        <function id="f5">
+            <name>Провести оплату через банк</name>
+            <org-unit>Бухгалтер</org-unit>
+        </function>
+        
+        <!-- Конечное событие -->
+        <event id="e8" type="end">
+            <name>Денежные средства перечислены поставщику. Процесс завершен</name>
+        </event>
+    </elements>
+    
+    <flows>
+        <!-- Основной поток -->
+        <flow from="e1" to="f1"/>
+        <flow from="f1" to="e2"/>
+        <flow from="e2" to="c1"/>
+        
+        <!-- Ветка 1: Корректный счет -->
+        <flow from="c1" to="e3" condition="Счет корректен"/>
+        <flow from="e3" to="f2"/>
+        <flow from="f2" to="e4"/>
+        <flow from="e4" to="f4"/>
+        
+        <!-- Ветка 2: Ошибки в счете -->
+        <flow from="c1" to="e5" condition="Обнаружены ошибки"/>
+        <flow from="e5" to="f3"/>
+        <flow from="f3" to="e6"/>
+        
+        <!-- Завершение основного процесса -->
+        <flow from="f4" to="e7"/>
+        <flow from="e7" to="f5"/>
+        <flow from="f5" to="e8"/>
+    </flows>
+    
+    <organizational-units>
+        <org-unit name="Менеджер отдела закупок"/>
+        <org-unit name="Руководитель отдела"/>
+        <org-unit name="Бухгалтер"/>
+    </organizational-units>
+</epc-process>
