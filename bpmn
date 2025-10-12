@@ -1,0 +1,334 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Процесс приемки готовой продукции" id="Process">
+    <mxGraphModel dx="1426" dy="881" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Дорожки (Pools/Lanes) -->
+        <mxCell id="pool1" value="Процесс приемки готовой продукции" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1200" height="800" as="geometry"/>
+        </mxCell>
+        
+        <!-- Дорожка Поставщик -->
+        <mxCell id="lane1" value="Поставщик" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="pool1">
+          <mxGeometry x="40" y="80" width="1160" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Дорожка Приемщик -->
+        <mxCell id="lane2" value="Приемщик/Кладовщик" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="pool1">
+          <mxGeometry x="40" y="160" width="1160" height="400" as="geometry"/>
+        </mxCell>
+        
+        <!-- Дорожка Менеджер -->
+        <mxCell id="lane3" value="Менеджер по закупкам" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="pool1">
+          <mxGeometry x="40" y="560" width="1160" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Дорожка Бухгалтерия -->
+        <mxCell id="lane4" value="Бухгалтерия" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="pool1">
+          <mxGeometry x="40" y="680" width="1160" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- START -->
+        <mxCell id="start" value="Поступление машины на склад" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="lane1">
+          <mxGeometry x="100" y="30" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Проверка документов -->
+        <mxCell id="task1" value="Проверить документы\n(ТТН, накладная)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="100" y="70" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Решение по документам -->
+        <mxCell id="gate1" value="Документы в порядке?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane2">
+          <mxGeometry x="130" y="170" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Внешний осмотр -->
+        <mxCell id="task2" value="Внешний осмотр тары\nи упаковки" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="100" y="290" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Решение по осмотру -->
+        <mxCell id="gate2" value="Есть повреждения?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane2">
+          <mxGeometry x="130" y="390" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Разгрузка -->
+        <mxCell id="task3" value="Разгрузить товар" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="300" y="290" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Сверка количества -->
+        <mxCell id="task4" value="Сверить количество\nи ассортимент" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="300" y="390" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Решение по количеству -->
+        <mxCell id="gate3" value="Есть расхождения?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane2">
+          <mxGeometry x="330" y="490" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Проверка качества -->
+        <mxCell id="task5" value="Проверить качество\n(выборочный контроль)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="500" y="390" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Решение по качеству -->
+        <mxCell id="gate4" value="Есть брак?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane2">
+          <mxGeometry x="530" y="490" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Параллельные задачи -->
+        <mxCell id="fork1" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelHorizontal;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane2">
+          <mxGeometry x="700" y="390" width="20" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Маркировка -->
+        <mxCell id="task6" value="Промаркировать\nтовар" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="750" y="390" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Внесение в WMS -->
+        <mxCell id="task7" value="Внести в WMS\n(оприходование)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="750" y="470" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Размещение -->
+        <mxCell id="task8" value="Разместить\nна хранение" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="750" y="550" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Соединение параллельных задач -->
+        <mxCell id="join1" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelHorizontal;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane2">
+          <mxGeometry x="920" y="390" width="20" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Подписание документов -->
+        <mxCell id="task9" value="Подписать\nдокументы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane2">
+          <mxGeometry x="970" y="470" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- END -->
+        <mxCell id="end" value="Оплата поставщику" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane4">
+          <mxGeometry x="970" y="30" width="80" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Задачи менеджера -->
+        <mxCell id="task10" value="Связаться с поставщиком\nдля урегулирования" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane3">
+          <mxGeometry x="100" y="40" width="140" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Акт расхождений -->
+        <mxCell id="task11" value="Составить акт\nрасхождений" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane2">
+          <mxGeometry x="100" y="510" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Акт брака -->
+        <mxCell id="task12" value="Составить акт\nбрака" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane2">
+          <mxGeometry x="500" y="610" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- СОЕДИНЕНИЯ -->
+
+        <!-- Start -> Проверка документов -->
+        <mxCell id="conn1" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="start" target="task1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="160" as="sourcePoint"/>
+            <mxPoint x="190" y="110" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Проверка документов -> Решение документов -->
+        <mxCell id="conn2" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task1" target="gate1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="170" as="sourcePoint"/>
+            <mxPoint x="210" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение документов ДА -> Внешний осмотр -->
+        <mxCell id="conn3" value="ДА" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="gate1" target="task2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="250" as="sourcePoint"/>
+            <mxPoint x="220" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение документов НЕТ -> Уведомление менеджера -->
+        <mxCell id="conn4" value="НЕТ" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="gate1" target="task10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="210" as="sourcePoint"/>
+            <mxPoint x="170" y="160" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Внешний осмотр -> Решение осмотр -->
+        <mxCell id="conn5" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task2" target="gate2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="350" as="sourcePoint"/>
+            <mxPoint x="210" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение осмотр НЕТ -> Разгрузка -->
+        <mxCell id="conn6" value="НЕТ" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="gate2" target="task3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="430" as="sourcePoint"/>
+            <mxPoint x="260" y="380" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение осмотр ДА -> Акт расхождений -->
+        <mxCell id="conn7" value="ДА" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="gate2" target="task11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="470" as="sourcePoint"/>
+            <mxPoint x="220" y="420" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Разгрузка -> Сверка количества -->
+        <mxCell id="conn8" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task3" target="task4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="350" as="sourcePoint"/>
+            <mxPoint x="410" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Сверка количества -> Решение количество -->
+        <mxCell id="conn9" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task4" target="gate3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="450" as="sourcePoint"/>
+            <mxPoint x="410" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение количество НЕТ -> Проверка качества -->
+        <mxCell id="conn10" value="НЕТ" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="gate3" target="task5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="530" as="sourcePoint"/>
+            <mxPoint x="460" y="480" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение количество ДА -> Акт расхождений -->
+        <mxCell id="conn11" value="ДА" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="gate3" target="task11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="530" as="sourcePoint"/>
+            <mxPoint x="160" y="570" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Проверка качества -> Решение качество -->
+        <mxCell id="conn12" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task5" target="gate4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="450" as="sourcePoint"/>
+            <mxPoint x="610" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение качество НЕТ -> Параллельные задачи -->
+        <mxCell id="conn13" value="НЕТ" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="gate4" target="fork1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="530" as="sourcePoint"/>
+            <mxPoint x="660" y="480" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Решение качество ДА -> Акт брака -->
+        <mxCell id="conn14" value="ДА" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="gate4" target="task12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="570" as="sourcePoint"/>
+            <mxPoint x="620" y="520" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Параллельные задачи -> Маркировка -->
+        <mxCell id="conn15" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.25;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="fork1" target="task6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="430" as="sourcePoint"/>
+            <mxPoint x="770" y="380" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Параллельные задачи -> Внесение в WMS -->
+        <mxCell id="conn16" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="fork1" target="task7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="450" as="sourcePoint"/>
+            <mxPoint x="770" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Параллельные задачи -> Размещение -->
+        <mxCell id="conn17" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.75;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="fork1" target="task8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="470" as="sourcePoint"/>
+            <mxPoint x="770" y="420" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Маркировка -> Соединение -->
+        <mxCell id="conn18" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.25;endArrow=block;endFill=1;" edge="1" parent="1" source="task6" target="join1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="420" as="sourcePoint"/>
+            <mxPoint x="920" y="370" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Внесение в WMS -> Соединение -->
+        <mxCell id="conn19" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="task7" target="join1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="500" as="sourcePoint"/>
+            <mxPoint x="920" y="450" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Размещение -> Соединение -->
+        <mxCell id="conn20" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.75;endArrow=block;endFill=1;" edge="1" parent="1" source="task8" target="join1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="580" as="sourcePoint"/>
+            <mxPoint x="920" y="530" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Соединение -> Подписание документов -->
+        <mxCell id="conn21" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;" edge="1" parent="1" source="join1" target="task9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="940" y="450" as="sourcePoint"/>
+            <mxPoint x="990" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Подписание документов -> END -->
+        <mxCell id="conn22" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task9" target="end">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1030" y="530" as="sourcePoint"/>
+            <mxPoint x="1080" y="480" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Акт расхождений -> Уведомление менеджера -->
+        <mxCell id="conn23" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task11" target="task10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="570" as="sourcePoint"/>
+            <mxPoint x="210" y="520" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Акт брака -> Уведомление менеджера -->
+        <mxCell id="conn24" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=block;endFill=1;" edge="1" parent="1" source="task12" target="task10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="670" as="sourcePoint"/>
+            <mxPoint x="170" y="100" as="targetPoint"/>
+            <mxArray as="points">
+              <mxPoint x="560" y="700"/>
+              <mxPoint x="170" y="700"/>
+            </mxArray>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
