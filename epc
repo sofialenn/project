@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epc_process name="Обработка заявки на оплату счета поставщику">
+    <metadata>
+        <notation>EPC</notation>
+        <author>[Ваше ФИО]</author>
+        <group>[Ваша группа]</group>
+        <date>[Дата выполнения]</date>
+    </metadata>
+    
+    <elements>
+        <!-- События -->
+        <element id="1" type="event" name="Поступил счет от поставщика за полученные товары/услуги"/>
+        <element id="3" type="event" name="Проверка счета завершена"/>
+        <element id="5" type="event" name="Счет соответствует требованиям"/>
+        <element id="7" type="event" name="Оплата счета согласована"/>
+        <element id="9" type="event" name="В счете обнаружены ошибки/несоответствия"/>
+        <element id="11" type="event" name="Счет возвращен поставщику. Процесс приостановлен"/>
+        <element id="13" type="event" name="Платежное поручение сформировано"/>
+        <element id="15" type="event" name="Денежные средства перечислены поставщику. Процесс завершен"/>
+        
+        <!-- Функции -->
+        <element id="2" type="function" name="Проверить счет на соответствие договору и наличию акта выполненных работ">
+            <org_unit>Менеджер отдела закупок</org_unit>
+        </element>
+        <element id="6" type="function" name="Согласовать оплату счета">
+            <org_unit>Руководитель отдела</org_unit>
+        </element>
+        <element id="10" type="function" name="Направить счет поставщику на исправление">
+            <org_unit>Менеджер отдела закупок</org_unit>
+        </element>
+        <element id="14" type="function" name="Подготовить платежное поручение в банк-клиенте">
+            <org_unit>Бухгалтер</org_unit>
+        </element>
+        <element id="16" type="function" name="Провести оплату через банк">
+            <org_unit>Бухгалтер</org_unit>
+        </element>
+        
+        <!-- Логические операторы -->
+        <element id="4" type="operator" name="XOR" operator_type="xor"/>
+    </elements>
+    
+    <connections>
+        <connection from="1" to="2"/>
+        <connection from="2" to="3"/>
+        <connection from="3" to="4"/>
+        <connection from="4" to="5" condition="Счет корректен"/>
+        <connection from="4" to="9" condition="Обнаружены ошибки"/>
+        <connection from="5" to="6"/>
+        <connection from="6" to="7"/>
+        <connection from="7" to="14"/>
+        <connection from="9" to="10"/>
+        <connection from="10" to="11"/>
+        <connection from="14" to="13"/>
+        <connection from="13" to="16"/>
+        <connection from="16" to="15"/>
+    </connections>
+</epc_process>
